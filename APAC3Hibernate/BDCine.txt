@@ -1,0 +1,45 @@
+CREATE DATABASE `Cine` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `Actor` (
+  `ActorID` bigint NOT NULL AUTO_INCREMENT,
+  `Edad` int DEFAULT NULL,
+  `Nombre` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ActorID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `ActorPelicula` (
+  `PeliculaID` bigint NOT NULL,
+  `ActorID` bigint NOT NULL,
+  PRIMARY KEY (`PeliculaID`,`ActorID`),
+  KEY `FK5yo87i4djaoisspk1wuqjlsy3` (`ActorID`),
+  CONSTRAINT `FK4sb616ust4qs6mvf8gp9gjail` FOREIGN KEY (`PeliculaID`) REFERENCES `Pelicula` (`PeliculaID`),
+  CONSTRAINT `FK5yo87i4djaoisspk1wuqjlsy3` FOREIGN KEY (`ActorID`) REFERENCES `Actor` (`ActorID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Director` (
+  `DirectorID` bigint NOT NULL AUTO_INCREMENT,
+  `Edad` int DEFAULT NULL,
+  `Nombre` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`DirectorID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Estudio` (
+  `EstudioID` bigint NOT NULL AUTO_INCREMENT,
+  `Central` varchar(255) DEFAULT NULL,
+  `Nombre` varchar(255) DEFAULT NULL,
+  `PeliculaID` bigint DEFAULT NULL,
+  PRIMARY KEY (`EstudioID`),
+  UNIQUE KEY `UK_t4t6dlmxlof9lsg6r0pfqmr4v` (`PeliculaID`),
+  CONSTRAINT `FKswnudngkhuul6nrw7ppyvqgwk` FOREIGN KEY (`PeliculaID`) REFERENCES `Pelicula` (`PeliculaID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `Pelicula` (
+  `PeliculaID` bigint NOT NULL AUTO_INCREMENT,
+  `Estreno` int DEFAULT NULL,
+  `Presupuesto` int DEFAULT NULL,
+  `Titulo` varchar(255) DEFAULT NULL,
+  `DirectorID` bigint DEFAULT NULL,
+  PRIMARY KEY (`PeliculaID`),
+  KEY `FK61ux1rmv5lk5t4ykrbsdqu20y` (`DirectorID`),
+  CONSTRAINT `FK61ux1rmv5lk5t4ykrbsdqu20y` FOREIGN KEY (`DirectorID`) REFERENCES `Director` (`DirectorID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
